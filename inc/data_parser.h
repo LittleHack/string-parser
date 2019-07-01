@@ -1,6 +1,9 @@
 #ifndef _DATA_PARSER_H_
 #define _DATA_PARSER_H_
 
+#include "util.h"
+#include "common.h"
+
 
 #define INT_MAX   ((int)((~((unsigned int)0)) >> 1))
 #define INT_MIN   (-(int)((~((unsigned int)0)) >> 1) - 1)
