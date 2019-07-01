@@ -26,5 +26,52 @@ public:
 
 };
 
+template<typename ElementType>
+class ElementParser: public DataParser
+{
+public:
+    ElementParser(): DataParser() {}
+
+    bool parse(std::string input)
+    {
+        m_dataStr = input;
+        clean();
+
+        if (false == startParse())
+        {
+            return false;
+        }
+
+        m_validity = true;
+        return true;
+    }
+
+    std::string getDataStr()
+    {
+        std::ostringstream stream;
+        stream << m_elementData;
+        return stream.str();
+    }
+
+    ElementType getData()
+    {
+        return m_elementData;
+    }
+
+protected:
+    ElementType m_elementData;
+
+private:
+    void clean()
+    {
+        m_validity = false;
+    }
+
+    // Following part need realization in its child classes.
+protected:
+    virtual bool startParse() = 0;
+
+};
+
 #endif
 
