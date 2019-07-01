@@ -69,6 +69,12 @@ bool ShortParser::startParse()
     return ret;
 }
 
- 
+bool StringParser::startParse()
+{
+    m_elementData = m_dataStr;
+    return true;
+}
+
+
 
 
