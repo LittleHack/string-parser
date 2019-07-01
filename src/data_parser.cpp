@@ -75,6 +75,43 @@ bool StringParser::startParse()
     return true;
 }
 
+bool DoubleParser::startParse()
+{
+    const char* str = m_dataStr.c_str();
+    char* tmp = NULL;
+
+    double doubleData = strtod(str, &tmp);
+    if (errno != 0 || tmp != str + strlen(str) || *str == ' ')
+    {
+        m_elementData = 0;
+        return false;
+    }
+    else
+    {
+        m_elementData = doubleData;
+        return true;
+    }
+}
+
+bool FloatParser::startParse()
+{
+    const char* str = m_dataStr.c_str();
+    char* tmp = NULL;
+    bool ret = true;
+    m_elementData = 0;
+
+    float floatData = strtof(str, &tmp);
+    if (errno != 0 || tmp != str + strlen(str) || *str == ' ')
+    {
+        m_elementData = 0;
+        return false;
+    }
+    else
+    {
+        m_elementData = floatData;
+        return true;
+    }
+}
 
 
 
