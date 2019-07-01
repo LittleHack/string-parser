@@ -7,7 +7,7 @@
 #define SHORT_MAX ((short)((~((unsigned short)0)) >> 1))
 #define SHORT_MIN (-(short)((~((unsigned short)0)) >> 1) - 1)
 
-
+// this class can parse one data of kind in DataType.
 class DataParser
 {
 public:
@@ -72,6 +72,28 @@ protected:
     virtual bool startParse() = 0;
 
 };
+
+#define ELEMENT_DATA_CONSTRUCTOR(className, elementType) \
+    className() \
+        : ElementParser<elementType>() {}
+
+#define DEFINE_ELEMENT_DATA_PARSER(className, elementType) \
+    class className: public ElementParser<elementType> \
+    { \
+    public: \
+        ELEMENT_DATA_CONSTRUCTOR(className, elementType) \
+    protected: \
+        bool startParse(); \
+    };
+
+DEFINE_ELEMENT_DATA_PARSER(IntParser, int)
+DEFINE_ELEMENT_DATA_PARSER(ShortParser, short)
+DEFINE_ELEMENT_DATA_PARSER(StringParser, std::string)
+DEFINE_ELEMENT_DATA_PARSER(DoubleParser, double)
+DEFINE_ELEMENT_DATA_PARSER(FloatParser, float)
+
+
+
 
 #endif
 
