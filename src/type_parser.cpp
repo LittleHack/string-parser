@@ -17,3 +17,37 @@ const TypeString TypeStringList[] =
 
 TypeParser* TypeParser::m_pInstance = NULL;
 
+TypeInfo TypeParser::convertTypeStrToType(std::string input)
+{
+    TypeInfo type = {T_UNDEFINED, 0};
+    int typeListSize = sizeof(TypeStringList) / sizeof(TypeString);
+    for (int stringIndex = 0; stringIndex < typeListSize; stringIndex++)
+    {
+        if (input.find(TypeStringList[stringIndex].dataTypeStr) != 0)
+        {
+            continue;
+        }
+
+        if (TypeStringList[stringIndex].dataType > T_ELEMENT_MIN &&
+            TypeStringList[stringIndex].dataType < T_ELEMENT_MAX &&
+            input == TypeStringList[stringIndex].dataTypeStr)
+        {
+            type.dataType = TypeStringList[stringIndex].dataType;
+        }
+        else if (TypeStringList[stringIndex].dataType > T_ARRAY_MIN &&
+                 TypeStringList[stringIndex].dataType < T_ARRAY_MAX)
+        {
+            IntParser tmp;
+            if (true == tmp.parse(input.substr(TypeStringList[stringIndex].dataTypeStr.size())))
+            {
+                type.dataType = TypeStringList[stringIndex].dataType;
+                type.arraySize = tmp.getData();
+            }
+        }
+
+        break;
+    }
+
+    return type;
+}
+
