@@ -8,10 +8,10 @@ const char*,float,array:long:4
 float,short  
 double,int  
 
-The message will be provided in :  
-*msg*&*msg*&...
-Example :  
-b b p p eee&3:1,9900,338  (const char*, array:int:3)
+The message will be provided in manner :  
+*msg*&*msg*&...  
+Example :   
+b b p p eee&3:1,9900,338  (const char*, array:int:3)  
 ss t e aaaa&5:1,2,3,4,5  (const char*, array:short:5)
 
 
