@@ -19,10 +19,13 @@ public:
     std::string getParsedStr();
 
 private:
+    bool parseOneData(std::string data, DataType dataType, int arraySize);
     void clean();
 
     std::string m_msgStr;
     std::vector<std::string> m_splitedMsg;
+    std::vector<TypeInfo> m_formatVec;
+    std::vector<DataParser*> m_parserVec;
     bool m_validity;
 
 };
