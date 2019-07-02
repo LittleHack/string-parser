@@ -10,6 +10,8 @@ typedef struct
     std::string dataTypeStr;
 } TypeString;
 
+#define TYPE2STR(type) TypeParser::GetInstance()->convertTypeToTypeStr(type)
+#define STR2TYPE(str)  TypeParser::GetInstance()->convertTypeStrToType(str)
 
 
 // this class converts type string and type.
@@ -18,7 +20,15 @@ class TypeParser
 public:
     static TypeParser* GetInstance()
     {
+        if (m_pInstance == NULL)
+        {
+            m_pInstance = new TypeParser();
+        }
+        return m_pInstance;
     }
+
+    TypeInfo convertTypeStrToType(std::string input);
+    std::string convertTypeToTypeStr(TypeInfo input);
 
 private:
     TypeParser() {}
