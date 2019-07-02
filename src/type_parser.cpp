@@ -51,3 +51,35 @@ TypeInfo TypeParser::convertTypeStrToType(std::string input)
     return type;
 }
 
+std::string TypeParser::convertTypeToTypeStr(TypeInfo input)
+{
+    std::string str = "";
+    int typeListSize = sizeof(TypeStringList) / sizeof(TypeString);
+    for (int stringIndex = 0; stringIndex < typeListSize; stringIndex++)
+    {
+        if (input.dataType != TypeStringList[stringIndex].dataType)
+        {
+            continue;
+        }
+
+        if (input.dataType > T_ELEMENT_MIN &&
+            input.dataType < T_ELEMENT_MAX &&
+            input.arraySize == 0)
+        {
+            str = TypeStringList[stringIndex].dataTypeStr;
+        }
+        else if (input.dataType > T_ARRAY_MIN &&
+                 input.dataType < T_ARRAY_MAX &&
+                 input.arraySize >= 0)
+        {
+            std::ostringstream stream;
+            stream << input.arraySize;
+            str = TypeStringList[stringIndex].dataTypeStr + stream.str();
+        }
+
+        break;
+    }
+
+    return str;
+}
+
