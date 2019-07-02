@@ -56,6 +56,21 @@ bool MsgParser::parseOneData(std::string data, DataType dataType, int arraySize)
         case T_FLOAT:
             dataParser = new FloatParser();
             break;
+        case T_INT_ARRAY:
+            dataParser = new IntArrayParser(arraySize);
+            break;
+        case T_SHORT_ARRAY:
+            dataParser = new ShortArrayParser(arraySize);
+            break;
+        case T_STRING_ARRAY:
+            dataParser = new StringArrayParser(arraySize);
+            break;
+        case T_DOUBLE_ARRAY:
+            dataParser = new DoubleArrayParser(arraySize);
+            break;
+        case T_FLOAT_ARRAY:
+            dataParser = new FloatArrayParser(arraySize);
+            break;
         default:
             return false;
     }
